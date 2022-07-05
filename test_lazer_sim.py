@@ -28,5 +28,6 @@ class Test(unittest.TestCase):
         self.assertEqual(distance([8,6]),9)
 
 if __name__ == '__main__':
+    __spec__ = None
     unittest.main()
     #commandline.main(sys.argv)
