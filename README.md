@@ -18,3 +18,10 @@ Notes:
    - Find all possible lasers, returning the initial shot direction from the incidence point and the amount of
      reflections that path will take (located in lazer_sim.simulate).
    - Draws the laser path itself, given its initial direction and amount of reflections (located in tk_gui.create_sim).
+
+# Testing commands
+
+## [Coverage](https://coverage.readthedocs.io/en/6.4.1/)
+
+``` python3 -m coverage run -m unittest discover ```
+``` python3 -m coverage report html ```

@@ -1,7 +1,11 @@
 from math import gcd
 
 # Helper Functions
+<<<<<<< HEAD
 #@profile
+=======
+# @profile
+>>>>>>> 964b723d217d6e9b5e0f01856113455950e8690e
 def smallest_vec(vec):
     '''
         ((int))->(int)
@@ -15,7 +19,11 @@ def smallest_vec(vec):
     if div == 0:
         return tuple(vec)
     return (vec[0]//div, vec[1]//div)
+<<<<<<< HEAD
 #@profile
+=======
+# @profile
+>>>>>>> 964b723d217d6e9b5e0f01856113455950e8690e
 def generate_surroundings(og_room, room, width, height):
     '''
         (dict, dict, int, int)->[dict]
@@ -88,7 +96,11 @@ def generate_surroundings(og_room, room, width, height):
         'yflip': room['yflip']
     })
     return surroundings
+<<<<<<< HEAD
 #@profile
+=======
+# @profile
+>>>>>>> 964b723d217d6e9b5e0f01856113455950e8690e
 def distance(vec1, vec2):
     '''
         ((int), (int))->num
@@ -98,7 +110,11 @@ def distance(vec1, vec2):
     return ((vec1[0]-vec2[0])**2 + (vec1[1]-vec2[1])**2)**0.5
 
 # Principal Function
+<<<<<<< HEAD
 #@profile
+=======
+# @profile
+>>>>>>> 964b723d217d6e9b5e0f01856113455950e8690e
 def simulate(width, height, inc, tar, bounces, ignore_inc):
     '''
         (int, int, (int), (int), int, boolean)->[(int)]
