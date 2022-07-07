@@ -2,13 +2,13 @@ from lazer_sim import *
 
 '''To run the line_profiler
 Prerequisite: install it using "pip install line_profiler"
-1. kernprof -l profile_lazer_sim.py
-2. python3 -m line_profiler profile_lazer_sim.py.lprof
+1. kernprof -l performance.py
+2. python3 -m line_profiler performance.py.lprof
 '''
 
 '''To run the memory_profiler
-Prerequisite: install it using "python setup.py install
-1. python3 -m memory_profiler profile_lazer_sim.py
+Prerequisite: install it using "pip install -U memory_profiler"
+1. python3 -m memory_profiler performance.py
 '''
 
 def profile_run():
