@@ -21,7 +21,7 @@ class Test(unittest.TestCase):
     def test_smallest_vec_fail(self):
         self.assertEqual(smallest_vec([2,6]),(2,3))
 
-    #needed to convert return value in code from a list to a tuple
+    #CHANGE: needed to convert return value in code from a list to a tuple
     def test_smallest_vec_zero(self):
         self.assertEqual(smallest_vec([0,0]),(0,0))
 
@@ -53,6 +53,7 @@ class Test(unittest.TestCase):
             { 'inc': (-1, 5), 'tar': (-2, 5), 'xflip': True, 'yflip': True } #left
         ])
 
+    #CHANGE: Added to increase line coverage (if block was never being entered)
     def test_generate_surroundings_right_room(self):
         og_room = { 'inc': (1,1), 'tar': (2,1), 'xflip': False, 'yflip': False }
         right_room = { 'inc': (5, 1), 'tar': (4, 1), 'xflip': True, 'yflip': False }
@@ -80,18 +81,13 @@ class Test(unittest.TestCase):
 
     @patch('lazer_sim.generate_surroundings')
     def test_simulate_horizontal(self, mock_generate):
-        def mock_generate_func(*args, **kwargs):
-            pass
-        mock_generate.side_effect = mock_generate_func
-
-        without_pass_through = simulate(3, 3, (1, 1), (1, 2), 2, False)
-        with_pass_through = simulate(3, 3, (1, 1), (1, 2), 2, True)
+        without_pass_through = simulate(3, 3, (1, 1), (2, 1), 2, False)
+        with_pass_through = simulate(3, 3, (1, 1), (2, 1), 2, True)
         self.assertEqual(without_pass_through, [
             (1, 0, 0), (1, 4, 1), (1, -2, 1), (1, 6, 2), (3, 4, 2), (-3, 4, 2),
             (3, -2, 2), (1, -6, 2), (-3, -2, 2)
         ])
         self.assertEqual(len(with_pass_through), len(without_pass_through)+1)
-
 
     @patch('lazer_sim.generate_surroundings')
     def test_simulate_vertical(self, mock_generate):
