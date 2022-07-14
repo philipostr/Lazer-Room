@@ -7,6 +7,14 @@ import sys
 
 class Test(unittest.TestCase):
 
+    def setUp(self):
+        self.mock_generate_return = [
+            { 'inc': (1, 5), 'tar': (2, 5), 'xflip': False, 'yflip': True }, #up
+            { 'inc': (5, 1), 'tar': (4, 1), 'xflip': True, 'yflip': False }, #right
+            { 'inc': (1, -1), 'tar': (2, -1), 'xflip': False, 'yflip': True }, #down
+            { 'inc': (-1, 1), 'tar': (-2, 1), 'xflip': True, 'yflip': False } #left
+        ]
+
 #TO TEST:
 # smallest_vec
 # generate_surroundings
@@ -81,21 +89,51 @@ class Test(unittest.TestCase):
 
     @patch('lazer_sim.generate_surroundings')
     def test_simulate_horizontal(self, mock_generate):
-        without_pass_through = simulate(3, 3, (1, 1), (2, 1), 2, False)
-        with_pass_through = simulate(3, 3, (1, 1), (2, 1), 2, True)
+        mock_generate.return_value = [
+            { 'inc': (1, 5), 'tar': (2, 5), 'xflip': False, 'yflip': True }, #up
+            { 'inc': (5, 1), 'tar': (4, 1), 'xflip': True, 'yflip': False }, #right
+            { 'inc': (1, -1), 'tar': (2, -1), 'xflip': False, 'yflip': True }, #down
+            { 'inc': (-1, 1), 'tar': (-2, 1), 'xflip': True, 'yflip': False } #left
+        ]
+
+        without_pass_through = simulate(3, 3, (1, 1), (2, 1), 1, False)
+        with_pass_through = simulate(3, 3, (1, 1), (2, 1), 1, True)
         self.assertEqual(without_pass_through, [
-            (1, 0, 0), (1, 4, 1), (1, -2, 1), (1, 6, 2), (3, 4, 2), (-3, 4, 2),
-            (3, -2, 2), (1, -6, 2), (-3, -2, 2)
+            (1, 0, 0), (1, 4, 1), (1, -2, 1)
         ])
         self.assertEqual(len(with_pass_through), len(without_pass_through)+1)
 
     @patch('lazer_sim.generate_surroundings')
     def test_simulate_vertical(self, mock_generate):
-        pass
+        mock_generate.return_value = [
+            { 'inc': (1, 5), 'tar': (1, 4), 'xflip': False, 'yflip': True }, #up
+            { 'inc': (5, 1), 'tar': (5, 2), 'xflip': True, 'yflip': False }, #right
+            { 'inc': (1, -1), 'tar': (1, -2), 'xflip': False, 'yflip': True }, #down
+            { 'inc': (-1, 1), 'tar': (-1, 2), 'xflip': True, 'yflip': False } #left
+        ]
+
+        without_pass_through = simulate(3, 3, (1, 1), (1, 2), 1, False)
+        with_pass_through = simulate(3, 3, (1, 1), (1, 2), 1, True)
+        self.assertEqual(without_pass_through, [
+            (0, 1, 0), (4, 1, 1), (-2, 1, 1)
+        ])
+        self.assertEqual(len(with_pass_through), len(without_pass_through)+1)
 
     @patch('lazer_sim.generate_surroundings')
     def test_simulate_angled(self, mock_generate):
-        pass
+        mock_generate.return_value = [
+            { 'inc': (1, 5), 'tar': (2, 4), 'xflip': False, 'yflip': True }, #up
+            { 'inc': (5, 1), 'tar': (4, 2), 'xflip': True, 'yflip': False }, #right
+            { 'inc': (1, -1), 'tar': (2, -2), 'xflip': False, 'yflip': True }, #down
+            { 'inc': (-1, 1), 'tar': (-2, 2), 'xflip': True, 'yflip': False } #left
+        ]
+
+        without_pass_through = simulate(3, 3, (1, 1), (2, 2), 1, False)
+        with_pass_through = simulate(3, 3, (1, 1), (2, 2), 1, True)
+        self.assertEqual(without_pass_through, [
+            (1, 1, 0), (1, 3, 1), (3, 1, 1), (1, -3, 1), (-3, 1, 1)
+        ])
+        self.assertEqual(len(with_pass_through), len(without_pass_through))
 
 if __name__ == '__main__':
     __spec__ = None
